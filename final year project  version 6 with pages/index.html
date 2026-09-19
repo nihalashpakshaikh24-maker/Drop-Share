@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DropShare — P2P File Share</title>
+    <script src="https://unpkg.com/peerjs@1.5.1/dist/peerjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- ============ HEADER ============ -->
+    <header class="app-header">
+        <div class="brand">
+            <span class="brand-dot"></span>
+            <span>DropShare</span>
+        </div>
+        <button id="hamburgerBtn" class="hamburger" aria-label="Open menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <!-- ============ HAMBURGER MENU ============ -->
+    <div id="menuBackdrop" class="menu-backdrop"></div>
+    <aside id="menuPanel" class="menu-panel">
+
+        <!-- Menu Header with Back Button -->
+        <div class="menu-header">
+            <div class="menu-header-left">
+                <div class="brand" id="menuBrand">
+                    <span class="brand-dot"></span>
+                    <span>DropShare</span>
+                </div>
+                <button id="menuBackBtn" class="menu-back" style="display:none;">← Back</button>
+            </div>
+            <button id="menuCloseBtn" class="menu-close" aria-label="Close menu">&times;</button>
+        </div>
+
+        <!-- Navigation view -->
+        <nav class="menu-nav" id="menuNav">
+            <button class="menu-item" data-section="about">
+                <span class="menu-item-num">01</span>
+                <span class="menu-item-title">About Us</span>
+                <span class="menu-item-arrow">→</span>
+            </button>
+            <button class="menu-item" data-section="how">
+                <span class="menu-item-num">02</span>
+                <span class="menu-item-title">How It Works</span>
+                <span class="menu-item-arrow">→</span>
+            </button>
+            <button class="menu-item" data-section="features">
+                <span class="menu-item-num">03</span>
+                <span class="menu-item-title">Features</span>
+                <span class="menu-item-arrow">→</span>
+            </button>
+        </nav>
+
+        <!-- ===== ABOUT US ===== -->
+        <div class="menu-section" id="section-about" data-view>
+            <h3 class="section-title">About Us</h3>
+            <p class="section-sub">The team behind DropShare</p>
+
+            <div class="about-block">
+                <p>DropShare was created by lead developer <strong>Nihal Shaikh</strong> and team members <strong>Vaibhav Pawar</strong> and <strong>Prasad Shinde</strong>.</p>
+                <p>We are 3rd year <strong>Bachelor of Computer Science</strong> students. This project was built under the guidance of <strong>Assistant Professor Omprakash Dhanwate</strong>.</p>
+            </div>
+
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-avatar">NS</div>
+                    <div class="team-name">Nihal Shaikh</div>
+                    <div class="team-role">Lead Developer</div>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar">VP</div>
+                    <div class="team-name">Vaibhav Pawar</div>
+                    <div class="team-role">Team Member</div>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar">PS</div>
+                    <div class="team-name">Prasad Shinde</div>
+                    <div class="team-role">Team Member</div>
+                </div>
+            </div>
+
+            <div class="guide-block">
+                <div class="guide-label">Under the guidance of</div>
+                <div class="guide-name">Assistant Professor Omprakash Dhanwate</div>
+            </div>
+        </div>
+
+        <!-- ===== HOW IT WORKS ===== -->
+        <div class="menu-section" id="section-how" data-view>
+            <h3 class="section-title">How It Works</h3>
+            <p class="section-sub">A quick walkthrough</p>
+
+            <div class="how-step">
+                <img src="images/step1-name.png" alt="Step 1">
+                <div class="how-text">
+                    <span class="how-num">Step 1</span>
+                    <h4>Enter your name</h4>
+                    <p>This is what your friend will see when they connect to you.</p>
+                </div>
+            </div>
+
+            <div class="how-step">
+                <img src="images/step2-share.png" alt="Step 2">
+                <div class="how-text">
+                    <span class="how-num">Step 2</span>
+                    <h4>Share your QR or link</h4>
+                    <p>Scan the QR code or copy the link and send it to your friend.</p>
+                </div>
+            </div>
+
+            <div class="how-step">
+                <img src="images/step3-connect.png" alt="Step 3">
+                <div class="how-text">
+                    <span class="how-num">Step 3</span>
+                    <h4>Connect</h4>
+                    <p>Paste your friend's ID, or simply open the link — it auto-connects.</p>
+                </div>
+            </div>
+
+            <div class="how-step">
+                <img src="images/step4-options.png" alt="Step 4">
+                <div class="how-text">
+                    <span class="how-num">Step 4</span>
+                    <h4>Pick what to send</h4>
+                    <p>Choose Photo, Video, or File — your device's picker opens instantly.</p>
+                </div>
+            </div>
+
+            <div class="how-step">
+                <img src="images/step5-progress.png" alt="Step 5">
+                <div class="how-text">
+                    <span class="how-num">Step 5</span>
+                    <h4>Watch it transfer</h4>
+                    <p>See live progress and transfer speed — all peer-to-peer.</p>
+                </div>
+            </div>
+
+            <div class="how-step">
+                <img src="images/step6-received.png" alt="Step 6">
+                <div class="how-text">
+                    <span class="how-num">Step 6</span>
+                    <h4>Received</h4>
+                    <p>The file downloads automatically on your friend's device.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== FEATURES ===== -->
+        <div class="menu-section" id="section-features" data-view>
+            <h3 class="section-title">Features</h3>
+            <p class="section-sub">What makes DropShare special</p>
+
+            <div class="feature-list">
+                <div class="feature-item">
+                    <div class="feature-icon">⚡</div>
+                    <div>
+                        <h4>Peer-to-Peer</h4>
+                        <p>Files go directly between devices. No server stores them.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🔒</div>
+                    <div>
+                        <h4>End-to-End Encrypted</h4>
+                        <p>WebRTC uses DTLS-SRTP — nobody can intercept your files.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📱</div>
+                    <div>
+                        <h4>QR & Link Sharing</h4>
+                        <p>Scan a QR or share a link — auto-connects instantly.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🗂️</div>
+                    <div>
+                        <h4>Any File Type</h4>
+                        <p>Photos, videos, PDFs, ZIPs, APKs, EXE — anything works.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📊</div>
+                    <div>
+                        <h4>Live Progress & Speed</h4>
+                        <p>Real-time progress bar with MB/s transfer speed display.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🌍</div>
+                    <div>
+                        <h4>Works Anywhere</h4>
+                        <p>Same room or across the world — as long as both are online.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📦</div>
+                    <div>
+                        <h4>Large File Support</h4>
+                        <p>Chunked streaming handles GB-scale files without memory issues.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🔄</div>
+                    <div>
+                        <h4>Auto-Reconnect</h4>
+                        <p>Mobile tab switching doesn't break the connection.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ============ MAIN ============ -->
+    <main class="container">
+
+        <!-- Connection bar -->
+        <div id="connectionBar" class="connection-bar" style="display:none;">
+            <span class="status-dot"></span>
+            <div class="connection-info">
+                <span id="connectionText">Connected</span>
+                <span id="connectionSub" class="connection-sub" style="display:none;"></span>
+            </div>
+            <button id="disconnectBtn" class="btn-disconnect">Disconnect</button>
+        </div>
+
+        <!-- ====== SCREEN 1: DISCOVERY ====== -->
+        <div id="discoveryScreen">
+
+            <section class="card">
+                <div class="step-badge">01</div>
+                <h2>Your name</h2>
+                <p class="hint">This is what your friend will see when you connect</p>
+                <input type="text" id="nameInput" placeholder="e.g. Rahul's Laptop" maxlength="30" autocomplete="off">
+                <button id="saveNameBtn" class="btn-secondary">Save Name</button>
+            </section>
+
+            <section class="card">
+                <div class="step-badge">02</div>
+                <h2>Your identity</h2>
+                <p class="hint">Scan the QR or share the link with a friend</p>
+                <div id="myId" class="id-box">Loading...</div>
+                <div id="qrcode" class="qr-code"></div>
+                <div class="button-row">
+                    <button id="copyIdBtn" class="btn-secondary">Copy ID</button>
+                    <button id="copyLinkBtn" class="btn-secondary">Copy Link</button>
+                </div>
+            </section>
+
+            <section class="card">
+                <div class="step-badge">03</div>
+                <h2>Connect to a friend</h2>
+                <p class="hint">Paste their ID, or open their shared link</p>
+                <input type="text" id="peerIdInput" placeholder="Paste friend's ID..." autocomplete="off">
+                <button id="connectBtn" class="btn-primary">Connect</button>
+            </section>
+
+        </div>
+
+        <!-- ====== SCREEN 2: TRANSFER ====== -->
+        <div id="transferScreen" style="display:none;">
+
+            <section class="card">
+                <div class="step-badge">04</div>
+                <h2>What would you like to share?</h2>
+                <p class="hint">Choose a category — the picker opens instantly</p>
+
+                <div class="share-grid">
+                    <button class="share-option" id="photoOption">
+                        <div class="share-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                <circle cx="8.5" cy="8.5" r="1.5"/>
+                                <polyline points="21 15 16 10 5 21"/>
+                            </svg>
+                        </div>
+                        <div class="share-label">Photo</div>
+                    </button>
+                    <button class="share-option" id="videoOption">
+                        <div class="share-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="23 7 16 12 23 17 23 7"/>
+                                <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+                            </svg>
+                        </div>
+                        <div class="share-label">Video</div>
+                    </button>
+                    <button class="share-option" id="fileOption">
+                        <div class="share-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <div class="share-label">File</div>
+                    </button>
+                </div>
+
+                <!-- Hidden native inputs -->
+                <input type="file" id="photoInput" accept="image/*" hidden>
+                <input type="file" id="videoInput" accept="video/*" hidden>
+                <input type="file" id="fileInput" hidden>
+
+                <!-- Progress -->
+                <div id="progressContainer" class="progress-container" style="display:none;">
+                    <div class="progress-info">
+                        <span id="progressLabel">Sending...</span>
+                        <span id="progressPercent">0%</span>
+                    </div>
+                    <div class="progress-track">
+                        <div id="progressBar" class="progress-bar"></div>
+                    </div>
+                    <p id="progressSpeed" class="progress-speed"></p>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- STATUS -->
+        <section class="status-card">
+            <p id="status">Initializing...</p>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Built with HTML, CSS &amp; JavaScript</p>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
